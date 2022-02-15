@@ -1,0 +1,29 @@
+{
+	"video": {
+		"fullscreen": true,
+		"vsync": false,
+		"framerate_limiter": null
+	},
+	"graphics": {
+		"fov": 85
+	},
+	"controls": {
+		"sensitivity": [100, 100]
+	},
+	"bindings": {
+		"forward": "z",
+		"backward": "s",
+		"left": "q",
+		"right": "d",
+		"jump": "space",
+		"slide": "control",
+		"sprint": "shift"
+	},
+	"performance": {
+		"max_blood_pools_number": 20
+	},
+	"misc": {
+		"show_FPS_counter": true,
+		"crosshair_rgba": [0, 255, 0, 120]
+	}
+}
