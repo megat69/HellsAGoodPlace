@@ -1,6 +1,7 @@
 from ursina import *
 from ursina.shaders import lit_with_shadows_shader
 from projectile import Projectile, ShotgunProjectile
+from random import uniform
 
 SLIDING_DURATION = 2
 SHOTGUN_PROJECTILE_AMOUNT = 7
@@ -115,18 +116,24 @@ class Player(Entity):
             self.jump()
         elif key == self._settings.bindings.slide:
             self.slide()
-        elif key == "right mouse down" and self.shotgun_countdown <= 0 and self.can_fire:
-            pass
-            #self.fire_shotgun()
+        elif key == "right mouse down" and self.shotgun_countdown <= 0 and self.can_fire and not held_keys[self._settings.bindings.sprint]:
+            self.fire_shotgun()
 
     def fire_shotgun(self):
+        old_rotation = self.camera_pivot.rotation
         for x in range(- SHOTGUN_PROJECTILE_AMOUNT // 2, SHOTGUN_PROJECTILE_AMOUNT // 2):
             for y in range(- SHOTGUN_PROJECTILE_AMOUNT // 2, SHOTGUN_PROJECTILE_AMOUNT // 2):
-                ShotgunProjectile(self.arms.world_position + (self.camera_pivot.forward + LVector3f(x/6, y/6, 0)) * 2,
+                self.camera_pivot.rotation_x -= x * uniform(3.5, 4.5)
+                self.camera_pivot.rotation_y += y * uniform(3.5, 4.5)
+                ShotgunProjectile(self.arms.world_position + self.camera_pivot.forward * 2,
                                   self.camera_pivot.world_rotation,
                                   self.camera_pivot.forward,
                                   self.world_position)
+                self.camera_pivot.rotation = old_rotation
         self.shotgun_countdown = 1
+        # Knockback
+        if self.camera_pivot.rotation_x > 5:
+            self.position -= self.forward * 6
 
     def slide(self):
         if self.is_sliding is False and self.grounded is True and held_keys[self._settings.bindings.forward]:

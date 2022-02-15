@@ -62,7 +62,7 @@ class Skull(Entity):
             blood_cubes_particles(self.position)
 
         # Changing to color 2 if player is too close
-        if distance(self, self.player) < 5:
+        if distance(self, self.player) < 8:
             if self.current_color == 0:
                 self.animate_color(self.colors[1])
                 self.current_color = 1

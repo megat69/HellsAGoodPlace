@@ -45,7 +45,7 @@ class ShotgunProjectile(Projectile):
 
         # Reducing damage based off starting point distance
         try:
-            self.damage = 8 - distance(self, self.starting_pos)
+            self.damage = 10 - distance(self, self.starting_pos)
         except Exception:
             pass
 

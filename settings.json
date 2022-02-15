@@ -1,6 +1,6 @@
 {
 	"video": {
-		"fullscreen": true,
+		"fullscreen": false,
 		"vsync": false,
 		"framerate_limiter": null
 	},
@@ -20,7 +20,7 @@
 		"sprint": "shift"
 	},
 	"performance": {
-		"max_blood_pools_number": 20
+		"max_blood_pools_number": null
 	},
 	"misc": {
 		"show_FPS_counter": true,
